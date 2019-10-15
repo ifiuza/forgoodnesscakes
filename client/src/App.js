@@ -1,6 +1,8 @@
 // /client/App.js
 import React, { Component } from 'react';
 import axios from 'axios';
+import { ReactComponent as Logo } from './public/pie.jpg';
+
 
 class App extends Component {
   // initialize our state
@@ -101,16 +103,36 @@ class App extends Component {
   // it is easy to understand their functions when you
   // see them render into our screen
   render() {
+
+      const h1 = {
+      color: "white",
+      backgroundColor: "DodgerBlue",
+      padding: "1px",
+      width:"400px",
+      fontFamily: "Arial",
+      margin: "30px 200px 30px 30px"
+      
+    };
+
+    const h2 = {
+      color:"red",
+      margin: "30px"
+    }
+
     const { data } = this.state;
     return (
+      
       <div>
+        <h1 style={h1}>For GoodNess Cakes! </h1>
+        <h2 style={h2}>Place your order here: </h2>
+
         <ul>
           {data.length <= 0
-            ? 'NO DB ENTRIES YET'
+            ? 'YOUR CAR IS EMPTY'
             : data.map((dat) => (
                 <li style={{ padding: '10px' }} key={data.message}>
-                  <span style={{ color: 'gray' }}> id: </span> {dat.id} <br />
-                  <span style={{ color: 'gray' }}> data: </span>
+                  <span style={{ color: 'gray' }}> Pie id: </span> {dat.id} <br />
+                  <span style={{ color: 'gray' }}> Name: </span>
                   {dat.message}
                 </li>
               ))}
@@ -119,7 +141,7 @@ class App extends Component {
           <input
             type="text"
             onChange={(e) => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
+            placeholder="Add your pie here"
             style={{ width: '200px' }}
           />
           <button onClick={() => this.putDataToDB(this.state.message)}>
@@ -131,7 +153,7 @@ class App extends Component {
             type="text"
             style={{ width: '200px' }}
             onChange={(e) => this.setState({ idToDelete: e.target.value })}
-            placeholder="put id of item to delete here"
+            placeholder="Type id of Pie to delete here"
           />
           <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
             DELETE
@@ -148,7 +170,7 @@ class App extends Component {
             type="text"
             style={{ width: '200px' }}
             onChange={(e) => this.setState({ updateToApply: e.target.value })}
-            placeholder="put new value of the item here"
+            placeholder="Type new Pie here"
           />
           <button
             onClick={() =>
